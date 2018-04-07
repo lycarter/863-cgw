@@ -263,14 +263,14 @@
 1	VB	migrate
 1	VB	know
 
+# BE is special
 1	BE	be
 
-# Verbs (past tense).
+# Verbs (past tense, singular)
 1	VBD	had
 1	VBD	spoke
 1	VBD	covered
 1	VBD	was
-1	VBD	were
 1	VBD	rode
 1	VBD	drank
 1	VBD	grew
@@ -279,8 +279,22 @@
 1	VBD	migrated
 1	VBD	knew
 
+# Verbs (past tense, plural)
+1	VBDS	were
+1	VBDS	had
+1	VBDS	spoke
+1	VBDS	covered
+1	VBDS	rode
+1	VBDS	drank
+1	VBDS	grew
+1	VBDS	carried
+1	VBDS	suggested
+1	VBDS	migrated
+1	VBDS	knew
+
 # too many verbs
 1	PTHVB	was
+1	PTHVBS	were
 
 # Verbs (present participles).
 1	VBG	having
@@ -305,6 +319,43 @@
 1	VBN	carried
 1	VBN	migrated
 1	VBN	known
+
+1	VBN[t]	had
+1	VBN[t]	covered
+1	VBN[t]	ridden
+1	VBN[t]	drunk
+1	VBN[t]	grown
+1	VBN[t]	carried
+1	VBN[t]	known
+
+# Verbs (all participle)
+1	VB[part]	having
+1	VB[part]	speaking
+1	VB[part]	covering
+1	VB[part]	riding
+1	VB[part]	drinking
+1	VB[part]	growing
+1	VB[part]	carrying
+1	VB[part]	suggesting
+1	VB[part]	migrating
+1	VB[part]	covered
+1	VB[part]	ridden
+1	VB[part]	drunk
+1	VB[part]	grown
+1	VB[part]	carried
+1	VB[part]	migrated
+1	VB[part]	known
+
+1	VB[part][t]	having
+1	VB[part][t]	covering
+1	VB[part][t]	riding
+1	VB[part][t]	drinking
+1	VB[part][t]	growing
+1	VB[part][t]	carrying
+1	VB[part][t]	suggesting
+
+
+
 # VBN but can take a VBG afterwards (transitive?)
 1	VBN[v]	been
 1	VBN[v]	suggested

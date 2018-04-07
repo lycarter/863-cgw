@@ -103,16 +103,6 @@
 1 NPS PRPS
 1 NPS NP CC NP
 
-# VPS
-1	VPS VBP
-1 VPS VBP PP
-1 VPS MD VBP
-1	VPS VB RB
-1	VPS HVBS VBG PP
-1	VPS VBP DirectObject
-1	VPS	VBG IndirectObject DirectObject
-1	VPS	HVBS VPS
-
 # objects
 1	DirectObject	VB PP
 1	DirectObject	SS
@@ -127,26 +117,43 @@
 1	VP VerbIT
 1	VP VBZ
 1	VP DOES
-1	VP MD VB VBN
-1	VP MD VB VP
-1	VP MD VB VBN[trans]
-1	VP MD VB PP
+1	VP MD have been VB[part]
+1	VP MD have been VB[part][t] NP
+1	VP MD have VBN
+1	VP MD have VBN[t] NP
+1	VP MD VB
 1	VP MD BE VBG
+1	VP MD BE VBN
 0.1 VP  VP CC VP
 1	VP	VBG	PP
 1	VP	HVB VP
 1	VP	BE VBD
 1	VP	VBD
 1	VP	VBD NP
+1	VP	VBD NPS
 1	VP	VBG IndirectObject DirectObject
 1	VP	VBP DirectObject
 1	VP	VBG	S
 1	VP	VBD	PP
+1	VP	VP	RB
 1	VP	VP	PP
 1	VP	PTHVB VBD
 
-# ie. been riding, suggested drinking
-1	VBN[trans]	VBN[v]	VP
+# VPS
+1	VPS VBP
+1	VPS VBP PP
+1	VPS MD VBP
+1	VPS VB RB
+1	VPS HVBS VBG PP
+1	VPS VBP DirectObject
+1	VPS	VBG IndirectObject DirectObject
+1	VPS	HVBS VPS
+1	VPS VBDS
+1	VPS	VBDS NPS
+1	VPS	VBDS NP
+1	VPS BE VBDS
+1	VPS	VBDS	PP
+1	VPS PTHVBS VBDS
 
 # no object variants (for phrases containing question-objects)
 1	VP[pres-nobj]	VBP
