@@ -80,6 +80,12 @@
 1	VerbT	drinks
 1	VerbT	carries
 1	VerbT	rides
+1	VerbT	speaks
+1	VerbT	grows
+1	VerbT	goes
+1	VerbT	migrates
+1	VerbT	suggests
+1	VerbT	knows
 
 # Intransitive verb
 1	VerbIT	drinks
