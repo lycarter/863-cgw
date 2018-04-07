@@ -62,7 +62,7 @@
 
 # Sentences where the object exists elsewhere
 1	S[nobj]	NP VP[nobj]
-1	Q[nobj]	DOES NP VP[pres-nobj]
+1	Q[nobj]	DOES NP VP[pres][nobj]
 
 
 # NP expands
@@ -156,9 +156,9 @@
 1	VPS PTHVBS VBDS
 
 # no object variants (for phrases containing question-objects)
-1	VP[pres-nobj]	VBP
-1	VP[pres-nobj]	VB NP
-1	VP[pres-nobj]	VBP NP VBP
+1	VP[pres][nobj]	VBP
+1	VP[pres][nobj]	VB NP
+1	VP[pres][nobj]	VBP NP VBP
 
 
 # PP expands
@@ -179,11 +179,11 @@
 1	V[pres]		V[pres] Conj V[pres]
 
 # no object variants (for phrases containing question-objects)
-1	VP[pres-nobj]	V[pres]
-1	VP[pres-nobj]	VP[pres] PP[nobj]
-1	VP[pres-nobj]	V[pres] NP[nobj]
-0.1	VP[pres-nobj]	VP[pres-nobj] PP
-0.1	VP[pres-nobj]	VP[pres-nobj] Conj VP[pres-nobj]
+1	VP[pres][nobj]	V[pres]
+1	VP[pres][nobj]	VP[pres] PP[nobj]
+1	VP[pres][nobj]	V[pres] NP[nobj]
+0.1	VP[pres][nobj]	VP[pres][nobj] PP
+0.1	VP[pres][nobj]	VP[pres][nobj] Conj VP[pres][nobj]
 1	PP[nobj]	Prep
 1	PP[nobj]	Prep PP
 1	NP[nobj]	Sel S[nobj]

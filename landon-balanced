@@ -1,0 +1,607 @@
+# This grammar uses a convention that
+#    - terminals are lowercase          (president)
+#    - preterminals are capitalized     (Noun)
+#    - other nonterminals are all-caps  (NP)
+#
+# This convention just makes grammars more readable to humans.  Thus:
+#
+#    - You should follow this convention unless you have a good reason
+#      not to.
+#
+#    - But your *program* should still work with grammars that don't
+#      follow this convention.  It should not pay any attention to
+#      upper/lower case.  From your program's point of view,
+#      if there is at least one rule for rewriting a symbol, then
+#      that symbol is a nonterminal and should be rewritten.
+#######################
+
+# Rules for creating full sentences.
+100	S1	ROOT
+62	ROOT	S .
+11	ROOT	SS .
+0.5	ROOT	S !
+18	ROOT	Q ?
+
+# The basic grammar rules.  Here's what the abbreviations stand for:
+#    S  = sentence
+#    NP = noun phrase
+#    VP = verb phrase
+#    PP = prepositional phrase
+#    Det = determiner (sometimes called "article")
+#    Prep = preposition
+#    Adj = adjective
+
+# Base sentence expands
+73	S	NP VP
+3	S	DO NOT VP
+3	S	either NP VP or NP VP
+3	S	DC , S
+16	DC	WRB S
+16	DC	C S
+16	DC	WDT SS
+16	DC	WDT VP
+1	DC 	DC PP
+16	DC	C SS
+16	DC	WP VBZ NP
+1	S 	DCV S
+1	DCV	DCVB S
+15	S	S DC
+
+
+# question expands
+20	Q	DO SS
+1	Q 	DOES S
+40	Q	WP Q[nobj]
+20	Q	WRB Q[nobj]
+1	Q 	HVB NP VP
+20	Q	HVBS NPS VPS
+
+# Plural sentence
+87	SS	NPS VPS
+12	SS	SS DC
+
+# Sentences where the object exists elsewhere
+1	S[nobj]	NP VP[nobj]
+1	Q[nobj]	DOES NP VP[pres][nobj]
+
+
+# NP expands
+56	NP	Noun
+28	NP	Det Noun
+2	NP	NP PP
+0.1	NP	NP Conj NP
+0.1	NP	Sel S
+0.1	NP	PRP$ NP
+2	NP	neither NP nor NP
+1	NP	VBG	PP
+
+# Noun with adjective phrase in middle of sentence
+1	NP	Noun PAUSE Det Noun PAUSE
+1	NP	Noun PAUSE Det NPS PAUSE
+1	NP	Noun PAUSE Noun PAUSE
+2	NP	Noun PAUSE NPS PAUSE
+
+# Noun with adjective phrase at end of sentence
+2	NP	Noun PAUSE Det Noun
+1	NP	Noun PAUSE Det NPS
+1	NP	Noun PAUSE Noun
+1	NP	Noun PAUSE NPS
+
+6	Noun	Adj Noun
+8	Noun	PRP
+50	Noun	Proper
+4	Noun	NNP
+
+1	NOUNS NNS
+100	NOUNS	NNP
+1	NOUNS NNPS
+2	NP	NNP
+
+# NPS
+10	NPS	NNS
+30	NPS	AdjS NNS
+50	NPS	PRPS
+10	NPS	NP CC NP
+
+# objects
+50	DirectObject	VB PP
+50	DirectObject	SS
+1	DirectObject	S
+100	IndirectObject	NP
+
+# VP expands
+16	VP	VerbT NP
+3	VP	VerbT JJ
+1	VP VBP NP
+3	VP	VB
+6	VP	VerbIT
+6	VP	VBZ
+3	VP	DOES
+6	VP	MD have been VB[part]
+1	VP MD have been VB[part][t] NP
+3	VP	MD have VBN
+1	VP MD have VBN[t] NP
+3	VP	MD VB
+3	VP	MD BE VBG
+1	VP MD BE VBN
+0.1 VP  VP CC VP
+1	VP	VBG	PP
+1	VP	HVB VP
+3	VP	BE VBD
+3	VP	VBD
+3	VP	VBD NP
+1	VP	VBD NPS
+1	VP	VBG IndirectObject DirectObject
+1	VP	VBP DirectObject
+1	VP	VBG	S
+1	VP	VBD	PP
+1	VP	VP	RB
+1	VP	VP	PP
+3	VP	PTHVB VBD
+
+# VPS
+12	VPS	VBP
+12	VPS	VBP PP
+12	VPS	MD VBP
+25	VPS	VB RB
+12	VPS	HVBS VBG PP
+12	VPS	VBP DirectObject
+12	VPS	VBG IndirectObject DirectObject
+1	VPS	HVBS VPS
+1	VPS VBDS
+1	VPS	VBDS NPS
+1	VPS	VBDS NP
+1	VPS BE VBDS
+1	VPS	VBDS	PP
+1	VPS PTHVBS VBDS
+
+# no object variants (for phrases containing question-objects)
+1	VP[pres][nobj]	VBP
+1	VP[pres][nobj]	VB NP
+1	VP[pres][nobj]	VBP NP VBP
+
+
+# PP expands
+61	PP	Prep NP
+23	PP	TO NOUNS
+7	PP	TO NP
+7	PP	Prep NPS
+
+
+
+
+# present tense variants
+1	S[pres]	NP	VP[pres]
+1	VP[pres]	V[pres] NP
+0.1	VP[pres]	VP[pres] PP
+1	VP[pres]	V'[pres]
+0.1	VP[pres]	VP[pres] Conj VP[pres]
+1	V[pres]		V[pres] Conj V[pres]
+
+# no object variants (for phrases containing question-objects)
+1	VP[pres][nobj]	V[pres]
+1	VP[pres][nobj]	VP[pres] PP[nobj]
+1	VP[pres][nobj]	V[pres] NP[nobj]
+0.1	VP[pres][nobj]	VP[pres][nobj] PP
+0.1	VP[pres][nobj]	VP[pres][nobj] Conj VP[pres][nobj]
+1	PP[nobj]	Prep
+1	PP[nobj]	Prep PP
+1	NP[nobj]	Sel S[nobj]
+1	S[nobj]		NP VP[nobj]
+1	VP[nobj]	Verb
+0.1	VP[nobj]	VP[nobj] PP
+0.1	VP[nobj]	VP[nobj] Conj VP[nobj]
+
+# Adjectives
+1 Adj CD
+100	Adj	JJ
+100	AdjS	CDS
+1 AdjS  JJ
+# This is a hand-generated set of preterminal rules.
+# It specifies a simple tag set which will be handled by the S2
+# grammar and which can (though doesn't necessarily need to be)
+# handled by the S1 grammar.
+#
+# The weights given here may be changed, but no new vocabulary
+# items are to be added.
+
+# Miscellaneous items that don't fit into any of our simple tags are
+# given to Misc.  You will want to develop your own tags for these!
+
+
+# Singular and mass nouns.  Notice that only the
+# ones that start with consonants get our Noun tag.
+6	Noun	castle
+10	Noun	king
+1	Noun	defeater
+1	Noun	sovereign
+2	Noun	servant
+1	Noun	corner
+1	Noun	land
+1	Noun	quest
+2	Noun	chalice
+1	Noun	master
+2	Noun	horse
+2	Noun	fruit
+2	Noun	swallow
+1	Noun	sun
+1	Noun	winter
+1	Noun	coconut
+1	Noun	pound
+1	Noun	husk
+2	Noun	home
+1	Noun	weight
+2	Noun	story
+
+# Determiners.
+26	Det	a
+1	Det	another
+1	Det	any
+1	Det	each
+1	Det	every
+1	Det	no
+6	Det	that
+66	Det	the
+1	Det	this
+
+# Prepositions.
+1	Prep	above
+1	Prep	across
+11	Prep	at
+1	Prep	below
+22	Prep	by
+11	Prep	for
+11	Prep	from
+1	Prep	into
+11	Prep	near
+11	Prep	of
+1	Prep	on
+1	Prep	over
+1	Prep	through
+22	Prep	with
+
+# Proper nouns.  Note that our Proper tag is just for people.
+50	Proper	Arthur
+16	Proper	Guinevere
+8	Proper	Sir Lancelot
+1	Proper	Sir Bedevere
+8	Proper	Zoot
+1	Proper	Dingo
+16	Proper	Patsy
+1	Proper	Uther Pendragon
+
+# Verbs (third person singular present).
+# Note that only transitive verbs get our VerbT tag,
+# and some of those could also function as intransitives!
+1	VerbT	has
+1	VerbT	covers
+66	VerbT	is
+1	VerbT	drinks
+1	VerbT	carries
+16	VerbT	rides
+1	VerbT	speaks
+1	VerbT	grows
+1	VerbT	goes
+1	VerbT	migrates
+1	VerbT	suggests
+16	VerbT	knows
+
+# Intransitive verb
+100	VerbIT	drinks
+
+# End-of-sentence.
+1	Misc	!
+1	Misc	.
+1	Misc	?
+
+# Pauses.
+100	PAUSE	,
+1	PAUSE	...
+1	PAUSE	--
+1	PAUSE	;
+1	PAUSE	:
+
+# Coordinating conjunctions.
+100	CC	and
+1	CC	but
+1	CC	or
+1	CC	either
+1	CC	nor
+1	CC	neither
+1	CC	so
+
+# # Numbers. (In case we need numbers for anything else)
+# 1	CD	eight
+# 1	CD	five
+# 1	CD	one
+# 1	CD	5.5
+# 1	CD	sixty
+# 1	CD	5,000
+
+# Numbers - Adjective. (Kevin did this)
+1	CD	one
+33	CDS	eight
+33	CDS	five
+1	CDS	5.5
+33	CDS	sixty
+1	CDS	5,000
+
+# Expletive.
+1	EX	there
+
+# Subordinating conjunctions.
+50	C	that
+1	C	so
+1	C	while
+50	C	because
+1	C	if
+
+# Modals.
+1	MD	can
+1	MD	could
+1	MD	may
+33	MD	might
+1	MD	must
+1	MD	ought
+1	MD	shall
+16	MD	should
+50	MD	will
+1	MD	would
+
+
+# Adjectives.
+1	JJ	bloody
+1	JJ	weary
+1	JJ	unable
+25	JJ	trusty
+1	JJ	further
+1	JJ	sacred
+1	JJ	tropical
+1	JJ	indigenous
+1	JJ	temperate
+1	JJ	hot
+1	JJ	lucky
+1	JJ	simple
+25	JJ	tiny
+25	JJ	hard
+1	JJ	sensational
+1	JJ	comparable
+1	JJ	angolian
+25	JJ	yellow
+1	JJ	plodding
+
+# Comparative adjectives.
+1	JJR	bloodier
+1	JJR	wearier
+1	JJR	trustier
+1	JJR	hotter
+1	JJR	simpler
+1	JJR	tinier
+1	JJR	harder
+
+# Superlative adjectives.
+1	JJS	bloodiest
+1	JJS	weariest
+1	JJS	trustiest
+1	JJS	hottest
+1	JJS	simplest
+1	JJS	tiniest
+1	JJS	hardest
+
+# Plural nouns.
+25	NNS	coconuts
+1	NNS	halves
+1	NNS	snows
+1	NNS	mountains
+1	NNS	areas
+25	NNS	strangers
+25	NNS	inches
+1	NNS	snakes
+1	NNS	ants
+25	NNS	nights
+
+# More proper nouns, not people.
+
+50	NNP	Camelot
+16	NNP	England
+16	NNP	Holy Grail
+16	NNP	Round Table
+
+# Plural proper nouns.
+1	NNPS	Britons
+1	NNPS	Saxons
+
+# Personal pronouns.
+25	PRP	he
+1	PRP	her
+1	PRP	him
+50	PRP	it
+1	PRP	one
+25	PRP	she
+1	PRP	them
+
+# plural pronouns
+100	PRPS	they
+
+
+# Possessive personal pronouns
+1	PRP$	her
+1	PRP$	his
+1	PRP$	its
+1	PRP$	their
+
+# Adverbs.
+1	RB	again
+1	RB	already
+1	RB	currently
+50	RB	frequently
+50	RB	precisely
+1	RB	south
+1	RB	successfully
+1	RB	unfortunately
+
+# 'do'/'does'
+100	DO	do
+100	DOES	does
+
+# 'to'
+100	TO	to
+
+# 'not'
+100	NOT	not
+
+# Verbs (base form).
+16	VB	have
+33	VB	speak
+1	VB	cover
+16	VB	ride
+1	VB	drink
+1	VB	grow
+1	VB	carry
+1	VB	suggest
+33	VB	migrate
+1	VB	know
+
+# BE is special
+100	BE	be
+
+# Verbs (past tense, singular)
+1	VBD	had
+1	VBD	spoke
+14	VBD	covered
+14	VBD	was
+14	VBD	rode
+28	VBD	drank
+1	VBD	grew
+14	VBD	carried
+14	VBD	suggested
+1	VBD	migrated
+1	VBD	knew
+
+# Verbs (past tense, plural)
+1	VBDS	were
+1	VBDS	had
+1	VBDS	spoke
+1	VBDS	covered
+1	VBDS	rode
+1	VBDS	drank
+1	VBDS	grew
+1	VBDS	carried
+1	VBDS	suggested
+1	VBDS	migrated
+1	VBDS	knew
+
+# too many verbs
+100	PTHVB	was
+1	PTHVBS	were
+
+# Verbs (present participles).
+1	VBG	having
+1	VBG	speaking
+25	VBG	covering
+1	VBG	being
+50	VBG	riding
+1	VBG	drinking
+1	VBG	growing
+1	VBG	carrying
+25	VBG	suggesting
+1	VBG	migrating
+1	VBG	knowing
+
+# Verbs (past participle).
+1	VBN	had
+1	VBN	spoken
+1	VBN	covered
+1	VBN	ridden
+1	VBN	drunk
+1	VBN	grown
+1	VBN	carried
+1	VBN	migrated
+100	VBN	known
+
+1	VBN[t]	had
+1	VBN[t]	covered
+1	VBN[t]	ridden
+1	VBN[t]	drunk
+1	VBN[t]	grown
+1	VBN[t]	carried
+1	VBN[t]	known
+
+# Verbs (all participle)
+1	VB[part]	having
+1	VB[part]	speaking
+1	VB[part]	covering
+1	VB[part]	riding
+1	VB[part]	drinking
+1	VB[part]	growing
+1	VB[part]	carrying
+1	VB[part]	suggesting
+1	VB[part]	migrating
+1	VB[part]	covered
+1	VB[part]	ridden
+1	VB[part]	drunk
+1	VB[part]	grown
+1	VB[part]	carried
+1	VB[part]	migrated
+1	VB[part]	known
+
+1	VB[part][t]	having
+1	VB[part][t]	covering
+1	VB[part][t]	riding
+1	VB[part][t]	drinking
+1	VB[part][t]	growing
+1	VB[part][t]	carrying
+1	VB[part][t]	suggesting
+
+
+
+# VBN but can take a VBG afterwards (transitive?)
+1	VBN[v]	been
+1	VBN[v]	suggested
+
+# More third person singular verbs.
+1	VBZ	speaks
+1	VBZ	grows
+1	VBZ	goes
+1	VBZ	migrates
+1	VBZ	suggests
+100	VBZ	knows
+
+# Verbs (present, plural, third person).
+1	VBP	have
+14	VBP	speak
+1	VBP	cover
+14	VBP	are
+14	VBP	ride
+1	VBP	drink
+14	VBP	grow
+14	VBP	carry
+14	VBP	suggest
+1	VBP	migrate
+14	VBP	know
+
+# helping verb
+100	HVBS	are
+1	HVB	is
+
+# Wh-determiners.
+50	WDT	that
+50	WDT	what
+1	WDT	which
+
+# Wh-pronouns.
+33	WP	what
+66	WP	who
+
+# Wh possessive pronoun.
+1	WP$	whose
+
+# Wh-adverbs
+1	WRB	how
+50	WRB	when
+1	WRB	where
+50	WRB	why
+
+
+# Possessive marker.
+1	Misc	's
