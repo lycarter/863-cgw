@@ -81,6 +81,9 @@
 1	VerbT	carries
 1	VerbT	rides
 
+# Intransitive verb
+1	VerbIT	drinks
+
 # End-of-sentence.
 1	Misc	!
 1	Misc	.
@@ -314,6 +317,9 @@
 1	VBP	suggest
 1	VBP	migrate
 1	VBP	know
+
+# helping verb
+1	HVB	are
 
 # Wh-determiners.
 1	WDT	that

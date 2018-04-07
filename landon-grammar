@@ -35,6 +35,10 @@
 1	S	NP VP
 1	S 	DO NOT VP
 1	S 	either NP VP or NP VP
+1	S 	DC , S
+1	DC 	WRB S
+1	S 	DCV S
+1	DCV	DCVB S
 
 
 # question expands
@@ -42,7 +46,7 @@
 1	Q 	DOES S
 1	Q 	WP Q[nobj]
 1	Q 	WRB Q[nobj]
-#1	Q 	WRB DOES NP have a king
+1	Q 	HVB NP VP
 
 # Plural sentence
 1	SS 	NPS VPS
@@ -78,13 +82,16 @@
 1	VPS VBP
 1 VPS VBP PP
 
-
+# objects
+1	DirectObject	VB PP
+1	IndirectObject	NP
 
 # VP expands
 1	VP	VerbT NP
 1	VP	VerbT JJ
 1	VP VBP NP
 1	VP VB
+1	VP VerbIT
 1	VP VBZ
 1	VP DOES
 1	VP MD VB VBN
@@ -93,6 +100,9 @@
 1	VP MD VB PP
 0.1 VP  VP CC VP
 1	VP	VBG	PP
+1	VP	HVB VP
+1	VP	VBG IndirectObject DirectObject
+1	VP	VBG	S
 1	VP	VBD	PP
 
 # ie. been riding, suggested drinking
