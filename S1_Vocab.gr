@@ -216,6 +216,9 @@
 1	PRP	them
 1	PRP	they
 
+# plural pronouns
+1	PRPS	they
+
 
 # Possessive personal pronouns
 1	PRP$	her
