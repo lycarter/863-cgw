@@ -39,6 +39,7 @@
 1	DC 	WRB S
 1	DC 	C S
 1	DC 	WDT SS
+1	DC 	WDT VP
 1	DC 	DC PP
 1	DC 	C SS
 1	DC 	WP VBZ NP
@@ -134,11 +135,15 @@
 0.1 VP  VP CC VP
 1	VP	VBG	PP
 1	VP	HVB VP
+1	VP	BE VBD
+1	VP	VBD
+1	VP	VBD NP
 1	VP	VBG IndirectObject DirectObject
 1	VP	VBP DirectObject
 1	VP	VBG	S
 1	VP	VBD	PP
 1	VP	VP	PP
+1	VP	PTHVB VBD
 
 # ie. been riding, suggested drinking
 1	VBN[trans]	VBN[v]	VP
@@ -152,6 +157,7 @@
 # PP expands
 1	PP	Prep NP
 1	PP	TO NOUNS
+1	PP	TO NP
 1	PP	Prep NPS
 
 

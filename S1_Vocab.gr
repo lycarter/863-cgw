@@ -279,6 +279,9 @@
 1	VBD	migrated
 1	VBD	knew
 
+# too many verbs
+1	PTHVB	was
+
 # Verbs (present participles).
 1	VBG	having
 1	VBG	speaking
