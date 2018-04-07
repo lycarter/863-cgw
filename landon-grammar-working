@@ -1,0 +1,141 @@
+# This grammar uses a convention that
+#    - terminals are lowercase          (president)
+#    - preterminals are capitalized     (Noun)
+#    - other nonterminals are all-caps  (NP)
+# 
+# This convention just makes grammars more readable to humans.  Thus:
+#
+#    - You should follow this convention unless you have a good reason
+#      not to.
+#
+#    - But your *program* should still work with grammars that don't 
+#      follow this convention.  It should not pay any attention to
+#      upper/lower case.  From your program's point of view, 
+#      if there is at least one rule for rewriting a symbol, then
+#      that symbol is a nonterminal and should be rewritten.
+#######################
+
+# Rules for creating full sentences.
+1 	S1 ROOT
+1	ROOT	S .
+1 ROOT  SS .
+0.5	ROOT	S !
+1	ROOT	Q ?
+
+# The basic grammar rules.  Here's what the abbreviations stand for:
+#    S  = sentence
+#    NP = noun phrase
+#    VP = verb phrase
+#    PP = prepositional phrase
+#    Det = determiner (sometimes called "article")
+#    Prep = preposition
+#    Adj = adjective
+
+# Base sentence expands
+1	S	NP VP
+1	S 	DO NOT VP
+1	S 	either NP VP or NP VP
+
+
+# question expands
+1	Q 	DO SS
+1	Q 	DOES S
+1	Q 	WP Q[nobj]
+1	Q 	WRB Q[nobj]
+#1	Q 	WRB DOES NP have a king
+
+# Plural sentence
+1	SS 	NPS VPS
+
+# Sentences where the object exists elsewhere
+1	S[nobj]	NP VP[nobj]
+1	Q[nobj]	DOES NP VP[pres-nobj]
+
+
+# NP expands
+1	NP	Noun
+3	NP	Det Noun
+1	NP	NP PP
+0.1	NP	NP Conj NP
+0.1	NP	Sel S
+0.1	NP	PRP$ NP
+1	NP neither NP nor NP
+3 Noun  Adj Noun
+1	Noun 	PRP
+1	Noun 	Proper
+1 Noun  NNP
+1	NP	VBG	PP
+1	NOUNS NNS
+1	NOUNS NNP
+1	NOUNS NNPS
+1	NP NNP
+
+# NPS
+1	NPS NNS
+1 NPS AdjS NNS
+
+# VPS
+1	VPS VBP
+1 VPS VBP PP
+
+
+
+# VP expands
+1	VP	VerbT NP
+1	VP	VerbT JJ
+1	VP VBP NP
+1	VP VB
+1	VP VBZ
+1	VP DOES
+1	VP MD VB VBN
+1	VP MD VB VP
+1	VP MD VB VBN[trans]
+1	VP MD VB PP
+0.1 VP  VP CC VP
+1	VP	VBG	PP
+1	VP	VBD	PP
+
+# ie. been riding, suggested drinking
+1	VBN[trans]	VBN[v]	VP
+
+# no object variants (for phrases containing question-objects)
+1	VP[pres-nobj]	VBP
+1	VP[pres-nobj]	VB NP
+1	VP[pres-nobj]	VBP NP VBP
+
+
+# PP expands
+1	PP	Prep NP
+1	PP	TO NOUNS
+1	PP	Prep NPS
+
+
+
+
+# present tense variants
+1	S[pres]	NP	VP[pres]
+1	VP[pres]	V[pres] NP
+0.1	VP[pres]	VP[pres] PP
+1	VP[pres]	V'[pres]
+0.1	VP[pres]	VP[pres] Conj VP[pres]
+1	V[pres]		V[pres] Conj V[pres]
+
+# no object variants (for phrases containing question-objects)
+1	VP[pres-nobj]	V[pres]
+1	VP[pres-nobj]	VP[pres] PP[nobj]
+1	VP[pres-nobj]	V[pres] NP[nobj]
+0.1	VP[pres-nobj]	VP[pres-nobj] PP
+0.1	VP[pres-nobj]	VP[pres-nobj] Conj VP[pres-nobj]
+1	PP[nobj]	Prep
+1	PP[nobj]	Prep PP
+1	NP[nobj]	Sel S[nobj]
+1	S[nobj]		NP VP[nobj]
+1	VP[nobj]	Verb
+0.1	VP[nobj]	VP[nobj] PP
+0.1	VP[nobj]	VP[nobj] Conj VP[nobj]
+
+# Adjectives
+1 Adj CD
+1 Adj JJ
+1 AdjS CDS
+1 AdjS  JJ
