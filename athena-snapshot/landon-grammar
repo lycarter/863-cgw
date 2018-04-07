@@ -35,6 +35,8 @@
 1	S	NP VP
 1	S 	DO NOT VP
 1	S 	either NP VP or NP VP
+1	S 	DC , S
+1	DC 	WRB S
 
 
 # question expands
@@ -85,18 +87,18 @@
 1	VP	VerbT JJ
 1	VP VBP NP
 1	VP VB
+1	VP VerbIT
 1	VP VBZ
 1	VP DOES
 1	VP MD VB VBN
-1	VP MD VB VP
-1	VP MD VB VBN[trans]
 1	VP MD VB PP
 0.1 VP  VP CC VP
-1	VP	VBG	PP
-1	VP	VBD	PP
+1	VP VBD PP
+# 0.05	VP	VP PP
+# 1	VP	Verb'
+# 1 Verb  Verb CC Verb
 
-# ie. been riding, suggested drinking
-1	VBN[trans]	VBN[v]	VP
+
 
 # no object variants (for phrases containing question-objects)
 1	VP[pres-nobj]	VBP
@@ -107,7 +109,6 @@
 # PP expands
 1	PP	Prep NP
 1	PP	TO NOUNS
-1	PP	Prep NPS
 
 
 

@@ -34,7 +34,6 @@
 # Base sentence expands
 1	S	NP VP
 1	S 	DO NOT VP
-1	S 	either NP VP or NP VP
 
 
 # question expands
@@ -58,13 +57,11 @@
 1	NP	NP PP
 0.1	NP	NP Conj NP
 0.1	NP	Sel S
-0.1	NP	PRP$ NP
-1	NP neither NP nor NP
 3 Noun  Adj Noun
 1	Noun 	PRP
 1	Noun 	Proper
 1 Noun  NNP
-1	NP	VBG	PP
+1	NP	VBG	TO 	NOUNS
 1	NOUNS NNS
 1	NOUNS NNP
 1	NOUNS NNPS
@@ -85,18 +82,13 @@
 1	VP	VerbT JJ
 1	VP VBP NP
 1	VP VB
-1	VP VBZ
-1	VP DOES
 1	VP MD VB VBN
-1	VP MD VB VP
-1	VP MD VB VBN[trans]
-1	VP MD VB PP
-0.1 VP  VP CC VP
-1	VP	VBG	PP
-1	VP	VBD	PP
+# 0.05	VP	VP PP
+# 1	VP	Verb'
+# 0.1 VP  VP Conj VP
+# 1 Verb  Verb Conj Verb
 
-# ie. been riding, suggested drinking
-1	VBN[trans]	VBN[v]	VP
+
 
 # no object variants (for phrases containing question-objects)
 1	VP[pres-nobj]	VBP
@@ -106,8 +98,6 @@
 
 # PP expands
 1	PP	Prep NP
-1	PP	TO NOUNS
-1	PP	Prep NPS
 
 
 

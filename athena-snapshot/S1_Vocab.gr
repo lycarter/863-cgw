@@ -81,6 +81,9 @@
 1	VerbT	carries
 1	VerbT	rides
 
+# Verbs (third person singular present, intransitive)
+1	VerbIT	drinks
+
 # End-of-sentence.
 1	Misc	!
 1	Misc	.
@@ -284,15 +287,14 @@
 1	VBN	had
 1	VBN	spoken
 1	VBN	covered
+1	VBN	been
 1	VBN	ridden
 1	VBN	drunk
 1	VBN	grown
 1	VBN	carried
+1	VBN	suggested
 1	VBN	migrated
 1	VBN	known
-# VBN but can take a VBG afterwards (transitive?)
-1	VBN[v]	been
-1	VBN[v]	suggested
 
 # More third person singular verbs.
 1	VBZ	speaks
