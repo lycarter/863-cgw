@@ -51,7 +51,7 @@
 1	Q 	WP Q[nobj]
 1	Q 	WRB Q[nobj]
 1	Q 	HVB NP VP
-1	Q 	HVB NPS VPS
+1	Q 	HVBS NPS VPS
 
 # Plural sentence
 1	SS 	NPS VPS

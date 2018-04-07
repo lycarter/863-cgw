@@ -322,7 +322,8 @@
 1	VBP	know
 
 # helping verb
-1	HVB	are
+1	HVBS	are
+1	HVB	is
 
 # Wh-determiners.
 1	WDT	that
