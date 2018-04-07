@@ -64,11 +64,25 @@
 0.1	NP	Sel S
 0.1	NP	PRP$ NP
 1	NP neither NP nor NP
+1	NP	VBG	PP
+
+# Noun with adjective phrase in middle of sentence
+1	NP	Noun PAUSE Det Noun PAUSE
+1	NP	Noun PAUSE Det NPS PAUSE
+1	NP	Noun PAUSE Noun PAUSE
+1	NP	Noun PAUSE NPS PAUSE
+
+# Noun with adjective phrase at end of sentence
+1	NP	Noun PAUSE Det Noun
+1	NP	Noun PAUSE Det NPS
+1	NP	Noun PAUSE Noun
+1	NP	Noun PAUSE NPS
+
 3 Noun  Adj Noun
 1	Noun 	PRP
 1	Noun 	Proper
 1 Noun  NNP
-1	NP	VBG	PP
+
 1	NOUNS NNS
 1	NOUNS NNP
 1	NOUNS NNPS
