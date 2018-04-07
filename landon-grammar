@@ -38,6 +38,7 @@
 1	S 	DC , S
 1	DC 	WRB S
 1	DC 	C S
+1	DC 	C SS
 1	DC 	WP VBZ NP
 1	S 	DCV S
 1	DCV	DCVB S
@@ -50,9 +51,11 @@
 1	Q 	WP Q[nobj]
 1	Q 	WRB Q[nobj]
 1	Q 	HVB NP VP
+1	Q 	HVB NPS VPS
 
 # Plural sentence
 1	SS 	NPS VPS
+1	SS 	SS DC
 
 # Sentences where the object exists elsewhere
 1	S[nobj]	NP VP[nobj]
@@ -86,6 +89,10 @@
 1	VPS VBP
 1 VPS VBP PP
 1 VPS MD VBP
+1	VPS VB RB
+1	VPS VBP DirectObject
+1	VPS	VBG IndirectObject DirectObject
+1	VPS	HVB VPS
 
 # objects
 1	DirectObject	VB PP
@@ -98,7 +105,6 @@
 1	VP	VerbT JJ
 1	VP VBP NP
 1	VP VB
-1	VP VB RB
 1	VP VerbIT
 1	VP VBZ
 1	VP DOES
