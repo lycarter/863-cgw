@@ -37,8 +37,10 @@
 1	S 	either NP VP or NP VP
 1	S 	DC , S
 1	DC 	WRB S
+1	DC 	WP VBZ NP
 1	S 	DCV S
 1	DCV	DCVB S
+1	S 	S DC
 
 
 # question expands
