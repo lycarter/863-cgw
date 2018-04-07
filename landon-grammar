@@ -38,6 +38,8 @@
 1	S 	DC , S
 1	DC 	WRB S
 1	DC 	C S
+1	DC 	WDT SS
+1	DC 	DC PP
 1	DC 	C SS
 1	DC 	WP VBZ NP
 1	S 	DCV S
@@ -84,15 +86,17 @@
 1	NPS NNS
 1 NPS AdjS NNS
 1 NPS PRPS
+1 NPS NP CC NP
 
 # VPS
 1	VPS VBP
 1 VPS VBP PP
 1 VPS MD VBP
 1	VPS VB RB
+1	VPS HVBS VBG PP
 1	VPS VBP DirectObject
 1	VPS	VBG IndirectObject DirectObject
-1	VPS	HVB VPS
+1	VPS	HVBS VPS
 
 # objects
 1	DirectObject	VB PP
@@ -112,6 +116,7 @@
 1	VP MD VB VP
 1	VP MD VB VBN[trans]
 1	VP MD VB PP
+1	VP MD BE VBG
 0.1 VP  VP CC VP
 1	VP	VBG	PP
 1	VP	HVB VP
@@ -119,6 +124,7 @@
 1	VP	VBP DirectObject
 1	VP	VBG	S
 1	VP	VBD	PP
+1	VP	VP	PP
 
 # ie. been riding, suggested drinking
 1	VBN[trans]	VBN[v]	VP
