@@ -121,10 +121,11 @@
 1	Proper	Title Name LastName
 
 # NPS
+1	NPS Det NPS
 1	NPS NNS
-1	NPS Det NNS
 1	NPS NNPS
 1	NPS AdjS NNS
+1	NPS AdjS NNPS
 1	NPS PRPS
 1	NPS NP CC NP
 
@@ -193,5 +194,9 @@
 # Adjectives
 1 Adj CD
 1 Adj JJ
+1 Adj JJR
+1 Adj JJS
 1 AdjS CDS
 1 AdjS  JJ
+1 AdjS  JJR
+1 AdjS  JJS
