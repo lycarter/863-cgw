@@ -102,6 +102,7 @@
 1	NP neither NP nor NP
 1	NP	VBG	PP
 1	NP	NP 's NP
+1	NP NNP
 
 0.01	NP	NP , NotWhole ,
 0.01	NP	NP -- NotWhole --
@@ -120,11 +121,15 @@
 1	Noun 	Proper
 1 Noun  NNP
 
-1	NP NNP
+#Proper Nouns
+1	Proper	Name
+1	Proper	Title Name
+1	Proper	Title Name LastName
 
 # NPS
+1 NPS Det NPS
 1 NPS NNS
-1 NPS Det NNS
+1 NPS NNPS
 1 NPS AdjS NNS
 1 NPS AdjS NNPS
 1 NPS PRPS
@@ -168,10 +173,9 @@
 
 # VPS
 1	VPS VBP
-1	VPS VBP PP
 1	VPS MD VBP
 1	VPS VB RB
-1	VPS HVBS VBG PP
+1	VPS HVBS VBG
 1	VPS VBP DirectObject[nopart]
 1	VPS	VBG IndirectObject DirectObject[part]
 1	VPS	HVBS VPS
@@ -179,9 +183,8 @@
 1	VPS	VBDS NPS
 1	VPS	VBDS NP
 1	VPS BE VBDS
-1	VPS	VBDS PP
+1	VPS	VPS PP
 1	VPS PTHVBS VBDS
-
 
 # PP expands
 1	PP	Prep NP
