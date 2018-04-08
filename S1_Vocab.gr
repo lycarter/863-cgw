@@ -118,11 +118,19 @@
 1	Misc	?
 
 # Pauses.
-1	PAUSE	,
-1	PAUSE	...
-1	PAUSE	--
-1	PAUSE	;
-1	PAUSE	:
+#1	PAUSE	,
+#1	PAUSE	...
+#1	PAUSE	--
+#1	PAUSE	;
+#1	PAUSE	:
+
+1	SemiColonLike	;
+1	SemiColonLike	--
+1	SemiColonLike	:
+
+1	ColonLike	:
+1	ColonLike	--
+
 
 # Coordinating conjunctions.
 1	CC	and
