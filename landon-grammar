@@ -110,6 +110,12 @@
 0.01	NP	NP , NotWhole
 0.01	NP	NP -- NotWhole
 
+0.01	NPS	NPS , NotWhole ,
+0.01	NPS	NPS -- NotWhole --
+
+0.01	NPS	NPS , NotWhole
+0.01	NPS	NPS -- NotWhole
+
 3 Noun  Adj Noun
 1	Noun 	PRP
 1	Noun 	Proper
