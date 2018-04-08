@@ -92,6 +92,11 @@
 1	Noun 	Proper
 1 Noun  NNP
 
+#Proper Nouns
+1	Proper	Name
+1	Proper	Title Name
+1	Proper	Title Name LastName
+
 1	NOUNS NNS
 1	NOUNS NNP
 1	NOUNS NNPS
@@ -153,15 +158,11 @@
 1	VP[pres-nobj]	VB NP
 1	VP[pres-nobj]	VBP NP VBP
 
-
 # PP expands
 1	PP	Prep NP
 1	PP	TO NOUNS
 1	PP	TO NP
 1	PP	Prep NPS
-
-
-
 
 # present tense variants
 1	S[pres]	NP	VP[pres]

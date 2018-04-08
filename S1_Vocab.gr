@@ -62,14 +62,20 @@
 1	Prep	with
 
 # Proper nouns.  Note that our Proper tag is just for people.
-1	Proper	Arthur
-1	Proper	Guinevere
-1	Proper	Sir Lancelot
-1	Proper	Sir Bedevere
-1	Proper	Zoot
-1	Proper	Dingo
-1	Proper	Patsy
-1	Proper	Uther Pendragon
+1	Name	Arthur
+1	Name	Guinevere
+1	Name	Lancelot
+1	Name	Bedevere
+1	Name	Zoot
+1	Name	Dingo
+1	Name	Patsy
+1	Name	Uther Pendragon
+
+1	LastName	Pendragon
+
+1	Title	Sir
+
+
 
 # Verbs (third person singular present).
 # Note that only transitive verbs get our VerbT tag,
@@ -316,6 +322,7 @@
 1	VBZ	migrates
 1	VBZ	suggests
 1	VBZ	knows
+1	VBZ	rides
 
 # Verbs (present, plural, third person).
 1	VBP	have
