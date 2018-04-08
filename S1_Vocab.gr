@@ -45,6 +45,10 @@
 1	Det	the
 1	Det	this
 
+1	DetS	any
+1	DetS	no
+1	DetS	the
+
 # Prepositions.
 1	Prep	above
 1	Prep	across
@@ -230,6 +234,47 @@
 1	NNS	snakes
 1	NNS	ants
 1	NNS	nights
+
+# places
+1	LOCATION 	mountains
+1	LOCATION 	areas
+1	LOCATION 	Camelot
+1	LOCATION 	England
+
+1	OBJECT	Round Table
+1	OBJECT	Holy Grail
+1	OBJECT	castle
+1	OBJECT	king
+1	OBJECT	defeater
+1	OBJECT	sovereign
+1	OBJECT	servant
+1	OBJECT	corner
+1	OBJECT	land
+1	OBJECT	quest
+1	OBJECT	chalice
+1	OBJECT	master
+1	OBJECT	horse
+1	OBJECT	fruit
+1	OBJECT	swallow
+1	OBJECT	sun
+1	OBJECT	winter
+1	OBJECT	coconut
+1	OBJECT	pound
+1	OBJECT	husk
+1	OBJECT	home
+1	OBJECT	weight
+1	OBJECT	story
+
+1	OBJECTS	Round Table
+1	OBJECTS	Holy Grail
+1	OBJECTS	coconuts
+1	OBJECTS	halves
+1	OBJECTS	mountains
+1	OBJECTS	areas
+1	OBJECTS	strangers
+1	OBJECTS	snakes
+1	OBJECTS	ants
+
 
 # More proper nouns, not people.
 

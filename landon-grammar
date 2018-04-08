@@ -15,13 +15,6 @@
 #      that symbol is a nonterminal and should be rewritten.
 #######################
 
-# Rules for creating full sentences.
-1 	S1 ROOT
-1	ROOT	S .
-1 ROOT  SS .
-0.5	ROOT	S !
-1	ROOT	Q ?
-
 # The basic grammar rules.  Here's what the abbreviations stand for:
 #    S  = sentence
 #    NP = noun phrase
@@ -30,6 +23,13 @@
 #    Det = determiner (sometimes called "article")
 #    Prep = preposition
 #    Adj = adjective
+
+# Rules for creating full sentences.
+1 	S1 ROOT
+1	ROOT	SorSS .
+0.01	ROOT	SorSS ...
+0.5	ROOT	SorSS !
+1	ROOT	Q ?
 
 # Base sentence expands
 1	S	NP VP
@@ -74,8 +74,6 @@
 
 1	S 	S ColonLike NotWhole
 
-
-
 # Plural sentence
 1	SS 	NPS VPS
 1	SS 	SS DC
@@ -111,18 +109,6 @@
 0.01	NP	NP , NotWhole
 0.01	NP	NP -- NotWhole
 
-# Noun with adjective phrase in middle of sentence
-#1	NP	Noun PAUSE Det Noun PAUSE
-#1	NP	Noun PAUSE Det NPS PAUSE
-#1	NP	Noun PAUSE Noun PAUSE
-#1	NP	Noun PAUSE NPS PAUSE
-
-# Noun with adjective phrase at end of sentence
-#1	NP	Noun PAUSE Det Noun
-#1	NP	Noun PAUSE Det NPS
-#1	NP	Noun PAUSE Noun
-#1	NP	Noun PAUSE NPS
-
 3 Noun  Adj Noun
 1	Noun 	PRP
 1	Noun 	Proper
@@ -131,7 +117,8 @@
 1	NP NNP
 
 # NPS
-1	NPS NNS
+1 NPS NNS
+1 NPS Det NNS
 1 NPS AdjS NNS
 1 NPS PRPS
 1 NPS NP CC NP
@@ -185,19 +172,20 @@
 1	VPS	VBDS NPS
 1	VPS	VBDS NP
 1	VPS BE VBDS
-1	VPS	VBDS	PP
+1	VPS	VBDS PP
 1	VPS PTHVBS VBDS
 
 
 # PP expands
 1	PP	Prep NP
-1	PP	TO NOUNS
-1	PP	TO NP
 1	PP	Prep NPS
+1	PP	TO PLACE
 
-1	NOUNS NNS
-1	NOUNS NNP
-1	NOUNS NNPS
+1	PLACE	LOCATION
+1	PLACE	PRP$ OBJECT
+1	PLACE	PRP$ OBJECTS
+1	PLACE	Det OBJECT
+1	PLACE	DetS OBJECTS
 
 # Adjectives
 1 Adj CD
