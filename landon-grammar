@@ -34,7 +34,18 @@
 # Base sentence expands
 1	S	NP VP
 1	S 	DO NOT VP
-1	S 	either NP VP or NP VP
+1	S 	either NPVerbs or DODOES
+
+1	NPVerbs	NP VerbIT
+1	NPVerbs	NP Verb[notLinking] NP
+1	NPVerbs	NP Verb[notLinking] NPS
+1	NPVerbs	NPS VerbITS
+1	NPVerbs	NPS Verb[notLinking]S NP
+1	NPVerbs	NPS Verb[notLinking]S NPS
+
+1	DODOES	NP DOES
+1	DODOES	NPS DO
+
 1	S 	DC , S
 1	DC 	WRB S
 1	DC 	C S
@@ -43,10 +54,16 @@
 1	DC 	DC PP
 1	DC 	C SS
 1	DC 	WP VBZ NP
+1	DC[hvb]	NP DOES
+1	DC[hvb]	NP DOES
 1	S 	DCV S
 1	DCV	DCVB S
 1	S 	S DC
 
+
+# Plural sentence
+1	SS 	NPS VPS
+1	SS 	SS DC
 
 # question expands
 1	Q 	DO SS
@@ -56,13 +73,10 @@
 1	Q 	HVB NP VP
 1	Q 	HVBS NPS VPS
 
-# Plural sentence
-1	SS 	NPS VPS
-1	SS 	SS DC
-
 # Sentences where the object exists elsewhere
 1	S[nobj]	NP VP[nobj]
-1	Q[nobj]	DOES NP VP[pres-nobj]
+1	Q[nobj]	DOES NP VPS
+1	Q[nobj]	DO NPS VPS
 
 
 # NP expands
@@ -74,6 +88,8 @@
 0.1	NP	PRP$ NP
 1	NP neither NP nor NP
 1	NP	VBG	PP
+1	NP	NP 's NP
+1	NP NNP
 
 # Noun with adjective phrase in middle of sentence
 1	NP	Noun PAUSE Det Noun PAUSE
@@ -97,66 +113,63 @@
 1	Proper	Title Name
 1	Proper	Title Name LastName
 
-1	NOUNS NNS
-1	NOUNS NNP
-1	NOUNS NNPS
-1	NP NNP
-
 # NPS
 1	NPS NNS
 1 NPS AdjS NNS
 1 NPS PRPS
 1 NPS NP CC NP
 
-# VPS
-1	VPS VBP
-1 VPS VBP PP
-1 VPS MD VBP
-1	VPS VB RB
-1	VPS HVBS VBG PP
-1	VPS VBP DirectObject
-1	VPS	VBG IndirectObject DirectObject
-1	VPS	HVBS VPS
-
 # objects
-1	DirectObject	VB PP
-1	DirectObject	SS
-1	DirectObject	S
+1	DirectObject[part]	VB PP
+1	DirectObject[part]	SS
+1	DirectObject[part]	S
+1	DirectObject[nopart]	NP
+1	DirectObject[nopart]	SS
+1	DirectObject[nopart]	S
 1	IndirectObject	NP
 
 # VP expands
 1	VP	VerbT NP
 1	VP	VerbT JJ
-1	VP VBP NP
 1	VP VB
 1	VP VerbIT
 1	VP VBZ
-1	VP DOES
-1	VP MD VB VBN
-1	VP MD VB VP
-1	VP MD VB VBN[trans]
-1	VP MD VB PP
+1	VP MD have been VB[part]
+1	VP MD have been VB[part][t] NP
+1	VP MD have VBN
+1	VP MD have VBN[t] NP
+1	VP MD VB
 1	VP MD BE VBG
+1	VP MD BE VBN
 0.1 VP  VP CC VP
 1	VP	VBG	PP
 1	VP	HVB VP
 1	VP	BE VBD
 1	VP	VBD
 1	VP	VBD NP
-1	VP	VBG IndirectObject DirectObject
-1	VP	VBP DirectObject
+1	VP	VBD NPS
+1	VP	VBG IndirectObject DirectObject[part]
 1	VP	VBG	S
 1	VP	VBD	PP
+1	VP	VP	RB
 1	VP	VP	PP
 1	VP	PTHVB VBD
 
-# ie. been riding, suggested drinking
-1	VBN[trans]	VBN[v]	VP
-
-# no object variants (for phrases containing question-objects)
-1	VP[pres-nobj]	VBP
-1	VP[pres-nobj]	VB NP
-1	VP[pres-nobj]	VBP NP VBP
+# VPS
+1	VPS VBP
+1	VPS VBP PP
+1	VPS MD VBP
+1	VPS VB RB
+1	VPS HVBS VBG PP
+1	VPS VBP DirectObject[nopart]
+1	VPS	VBG IndirectObject DirectObject[part]
+1	VPS	HVBS VPS
+1	VPS VBDS
+1	VPS	VBDS NPS
+1	VPS	VBDS NP
+1	VPS BE VBDS
+1	VPS	VBDS	PP
+1	VPS PTHVBS VBDS
 
 # PP expands
 1	PP	Prep NP
@@ -164,27 +177,9 @@
 1	PP	TO NP
 1	PP	Prep NPS
 
-# present tense variants
-1	S[pres]	NP	VP[pres]
-1	VP[pres]	V[pres] NP
-0.1	VP[pres]	VP[pres] PP
-1	VP[pres]	V'[pres]
-0.1	VP[pres]	VP[pres] Conj VP[pres]
-1	V[pres]		V[pres] Conj V[pres]
-
-# no object variants (for phrases containing question-objects)
-1	VP[pres-nobj]	V[pres]
-1	VP[pres-nobj]	VP[pres] PP[nobj]
-1	VP[pres-nobj]	V[pres] NP[nobj]
-0.1	VP[pres-nobj]	VP[pres-nobj] PP
-0.1	VP[pres-nobj]	VP[pres-nobj] Conj VP[pres-nobj]
-1	PP[nobj]	Prep
-1	PP[nobj]	Prep PP
-1	NP[nobj]	Sel S[nobj]
-1	S[nobj]		NP VP[nobj]
-1	VP[nobj]	Verb
-0.1	VP[nobj]	VP[nobj] PP
-0.1	VP[nobj]	VP[nobj] Conj VP[nobj]
+1	NOUNS NNS
+1	NOUNS NNP
+1	NOUNS NNPS
 
 # Adjectives
 1 Adj CD
