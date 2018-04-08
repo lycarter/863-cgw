@@ -127,13 +127,13 @@
 1	Proper	Title Name LastName
 
 # NPS
-1	NPS Det NPS
-1	NPS NNS
-1	NPS NNPS
-1	NPS AdjS NNS
-1	NPS AdjS NNPS
-1	NPS PRPS
-1	NPS NP CC NP
+1 NPS Det NPS
+1 NPS NNS
+1 NPS NNPS
+1 NPS AdjS NNS
+1 NPS AdjS NNPS
+1 NPS PRPS
+1 NPS NP CC NP
 
 # objects
 1	DirectObject[part]	VB PP
