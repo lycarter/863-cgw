@@ -88,7 +88,29 @@
 1	VerbT	knows
 
 # Intransitive verb
+1	VerbIT	covers
 1	VerbIT	drinks
+1	VerbIT	carries
+1	VerbIT	rides
+1	VerbIT	speaks
+1	VerbIT	grows
+1	VerbIT	goes
+1	VerbIT	migrates
+1	VerbIT	suggests
+1	VerbIT	knows
+
+# Not Linking
+1	Verb[notLinking]	has
+1	Verb[notLinking]	covers
+1	Verb[notLinking]	drinks
+1	Verb[notLinking]	carries
+1	Verb[notLinking]	rides
+1	Verb[notLinking]	speaks
+1	Verb[notLinking]	grows
+1	Verb[notLinking]	goes
+1	Verb[notLinking]	migrates
+1	Verb[notLinking]	suggests
+1	Verb[notLinking]	knows
 
 # End-of-sentence.
 1	Misc	!
@@ -263,12 +285,36 @@
 1	VB	migrate
 1	VB	know
 
+# Plural intransitive verbs
+1	VerbITS	speak
+1	VerbITS	cover
+1	VerbITS	ride
+1	VerbITS	drink
+1	VerbITS	grow
+1	VerbITS	carry
+1	VerbITS	suggest
+1	VerbITS	migrate
+1	VerbITS	know
+
+# plural not linking verbs
+1	Verb[notLinking]S	have
+1	Verb[notLinking]S	speak
+1	Verb[notLinking]S	cover
+1	Verb[notLinking]S	ride
+1	Verb[notLinking]S	drink
+1	Verb[notLinking]S	grow
+1	Verb[notLinking]S	carry
+1	Verb[notLinking]S	suggest
+1	Verb[notLinking]S	migrate
+1	Verb[notLinking]S	know
+
 # BE is special
 1	BE	be
 
 # Verbs (past tense, singular)
 1	VBD	had
 1	VBD	spoke
+1	VBD	ate
 1	VBD	covered
 1	VBD	was
 1	VBD	rode
@@ -282,6 +328,7 @@
 # Verbs (past tense, plural)
 1	VBDS	were
 1	VBDS	had
+1	VBDS	ate
 1	VBDS	spoke
 1	VBDS	covered
 1	VBDS	rode
@@ -353,12 +400,6 @@
 1	VB[part][t]	growing
 1	VB[part][t]	carrying
 1	VB[part][t]	suggesting
-
-
-
-# VBN but can take a VBG afterwards (transitive?)
-1	VBN[v]	been
-1	VBN[v]	suggested
 
 # More third person singular verbs.
 1	VBZ	speaks
