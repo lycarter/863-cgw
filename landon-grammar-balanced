@@ -150,7 +150,7 @@
 # VP expands
 16	VP	VerbT NP
 2	VP	VerbT JJ
-9	VP	VB
+0.1	VP	VB
 16	VP	VerbIT
 1	VP VBZ
 4	VP	MD have been VB[part]
