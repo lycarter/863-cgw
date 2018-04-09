@@ -103,7 +103,7 @@
 1	NP neither NP nor NP
 1	NP	VBG	PP
 1	NP	NP 's NP
-1	NP NNP
+0.1	NP NNP
 
 0.01	NP	NP , NotWhole ,
 0.01	NP	NP -- NotWhole --
@@ -169,8 +169,7 @@
 1	VP MD BE VBN
 0.1 VP  VP CC VP
 1	VP	VBG	PP
-#1	VP	HVB VP
-1	VP 	HVB VBG
+0.1	VP 	HVB VBG
 1	VP	BE VBD
 1	VP	VBD
 1	VP	VBD NP
@@ -191,14 +190,14 @@
 1	VP	VP	RB
 1	VP	RBly VP
 1	VP	VP	PP
-1	VP	PTHVB VBD
+0.1	VP	PTHVB VBD
 
 # VPS
 1	VPS VBP
 1	VPS MD VBP
 1	VPS VPS RB
 1	VPS RBly VPS
-1	VPS HVBS VBG
+0.1	VPS HVBS VBG
 1	VPS MD have been VB[part]
 1	VPS MD have been VB[part][t] NP
 1	VPS MD have VBN
@@ -211,7 +210,7 @@
 
 1	VPS VBP[knowledge] DirectObject[part]
 1	VPS VBP[knowledge] IndirectObject DirectObject[part]
-1	VPS HVBS VPS[afterHelping]
+0.1	VPS HVBS VPS[afterHelping]
 
 1	VPS[afterHelping] VBG IndirectObject DirectObject[part]
 1	VPS[afterHelping] VBG DirectObject[nopart]
@@ -229,8 +228,8 @@
 1	VPS PTHVBS VBDS
 
 # PP expands
-1	PP	Prep NP
-1	PP	Prep NPS
+100	PP	Prep NP
+100	PP	Prep NPS
 1	PP	TO PLACE
 
 1	PLACE	LOCATION
