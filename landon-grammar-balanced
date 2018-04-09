@@ -1,0 +1,250 @@
+# This grammar uses a convention that
+#    - terminals are lowercase          (president)
+#    - preterminals are capitalized     (Noun)
+#    - other nonterminals are all-caps  (NP)
+#
+# This convention just makes grammars more readable to humans.  Thus:
+#
+#    - You should follow this convention unless you have a good reason
+#      not to.
+#
+#    - But your *program* should still work with grammars that don't
+#      follow this convention.  It should not pay any attention to
+#      upper/lower case.  From your program's point of view,
+#      if there is at least one rule for rewriting a symbol, then
+#      that symbol is a nonterminal and should be rewritten.
+#######################
+
+# The basic grammar rules.  Here's what the abbreviations stand for:
+#    S  = sentence
+#    NP = noun phrase
+#    VP = verb phrase
+#    PP = prepositional phrase
+#    Det = determiner (sometimes called "article")
+#    Prep = preposition
+#    Adj = adjective
+
+# Rules for creating full sentences.
+100	S1	ROOT
+82	ROOT	SorSS .
+0.01	ROOT	SorSS ...
+0.5	ROOT	SorSS !
+12	ROOT	Q ?
+
+# Base sentence expands
+80	S	NP VP
+0.01	S	S , CC S
+2	S	DO NOT VP
+2	S	either NPVerbs or DODOES
+
+100	NPVerbs	NP VerbIT
+1	NPVerbs	NP Verb[notLinking] NP
+1	NPVerbs	NP Verb[notLinking] NPS
+1	NPVerbs	NPS VerbITS
+1	NPVerbs	NPS Verb[notLinking]S NP
+1	NPVerbs	NPS Verb[notLinking]S NPS
+
+100	DODOES	NP DOES
+1	DODOES	NPS DO
+
+2	S	DC , S
+11	DC	WRB S
+33	DC	C S
+11	DC	WDT SS
+11	DC	WDT VP
+11	DC	DC PP
+11	DC	C SS
+11	DC	WP VBZ NP
+1	DC[hvb]	NP DOES
+1	DC[hvb]	NP DOES
+11	S	S DC
+
+72	SorSS	S
+27	SorSS	SS
+
+1	S 	SorSS SemiColonLike SorSS
+
+1	NotWhole S
+1	NotWhole SS
+50	NotWhole	NP
+1	NotWhole VP
+50	NotWhole	NPS
+1	NotWhole VPS
+
+1	S 	S ColonLike NotWhole
+
+# Plural sentence
+82	SS	NPS VPS
+17	SS	SS DC
+
+# question expands
+20	Q	DO SS
+1	Q 	DOES S
+40	Q	WP Q[nobj]
+20	Q	WRB Q[nobj]
+1	Q 	HVB NP VP[afterHelping]
+20	Q	HVBS NPS VPS[afterHelping]
+
+# Sentences where the object exists elsewhere
+1	S[nobj]	NP VP[nobj]
+1	Q[nobj]	DOES NP VPS
+1	Q[nobj]	DO NPS VPS
+
+
+# NP expands
+2	NP	Noun
+25	NP	Det Noun
+49	NP	Proper
+1	NP 	DetProp Proper
+1	NP	NP PP
+0.1	NP	NP Conj NP
+0.1	NP	Sel S
+0.1	NP	PRP$ NP
+1	NP	neither NP nor NP
+1	NP	VBG	PP
+1	NP	NP 's NP
+4	NP	NNP
+
+0.01	NP	NP , NotWhole ,
+0.01	NP	NP -- NotWhole --
+
+0.01	NP	NP , NotWhole
+0.01	NP	NP -- NotWhole
+
+0.01	NPS	NPS , NotWhole ,
+0.01	NPS	NPS -- NotWhole --
+
+0.01	NPS	NPS , NotWhole
+0.01	NPS	NPS -- NotWhole
+
+20	Noun	Adj Noun
+7	NP	PRP
+12	Noun	NNP
+
+#Proper Nouns
+85	Proper	Name
+11	Proper	Title Name
+2	Proper	Name LastName
+1	Proper	Title Name LastName
+
+# NPS
+8	NPS	Det NPS
+17	NPS	NNS
+8	NPS	NNPS
+17	NPS	AdjS NNS
+4	NPS	AdjS NNPS
+30	NPS	PRPS
+4	NPS	NP CC NP
+1 NPS NPS CC NPS
+1 NPS NPS CC NP
+4	NPS	NP CC NPS
+
+# objects
+1	DirectObject[part]	VB PP
+1	DirectObject[part]	SS
+1	DirectObject[part]	S
+1	DirectObject[nopart]	NP
+#			1	DirectObject[nopart]	SS
+#			1	DirectObject[nopart]	S
+100	IndirectObject	NP
+
+# VP expands
+16	VP	VerbT NP
+2	VP	VerbT JJ
+9	VP	VB
+16	VP	VerbIT
+1	VP VBZ
+4	VP	MD have been VB[part]
+1	VP MD have been VB[part][t] NP
+2	VP	MD have VBN
+1	VP MD have VBN[t] NP
+
+2	VP	has been VB[part]
+1	VP has been VB[part][t] NP
+1	VP has VBN
+1	VP has VBN[t] NP
+
+2	VP	MD VB
+2	VP	MD BE VBG
+1	VP MD BE VBN
+0.1 VP  VP CC VP
+1	VP	VBG	PP
+#1	VP	HVB VP
+1	VP 	HVB VBG
+2	VP	BE VBD
+2	VP	VBD
+2	VP	VBD NP
+1	VP	VBD NPS
+1	VP	HVB VP[afterHelping]
+
+1	VP[afterHelping] VBG IndirectObject DirectObject[nopart]
+1	VP[afterHelping] VBG DirectObject[nopart]
+1	VP[afterHelping] VBG[knowledge] DirectObject[part]
+
+1	VP 	VBP[knowledge] DirectObject[part]
+1	VP 	VBP[knowledge] IndirectObject DirectObject[part]
+
+1	VP VerbT DirectObject[part]
+16	VP	VerbIT
+
+1	VP	VBD	PP
+1	VP	VP	RB
+1	VP	RBly VP
+1	VP	VP	PP
+2	VP	PTHVB VBD
+
+# VPS
+4	VPS	VBP
+4	VPS	MD VBP
+16	VPS	VPS RB
+4	VPS	RBly VPS
+4	VPS	HVBS VBG
+1	VPS MD have been VB[part]
+1	VPS MD have been VB[part][t] NP
+1	VPS MD have VBN
+1	VPS MD have VBN[t] NP
+
+1	VPS have been VB[part]
+1	VPS have been VB[part][t] NP
+1	VPS have VBN
+1	VPS have VBN[t] NP
+
+8	VPS	VBP[knowledge] DirectObject[part]
+1	VPS VBP[knowledge] IndirectObject DirectObject[part]
+4	VPS	HVBS VPS[afterHelping]
+
+1	VPS[afterHelping] VBG IndirectObject DirectObject[part]
+1	VPS[afterHelping] VBG DirectObject[nopart]
+1	VPS[afterHelping] VBG[knowledge] DirectObject[part]
+
+4	VPS	VBP[t] DirectObject[nopart]
+24	VPS	VBP[it]
+
+1	VPS	HVBS VPS
+12	VPS	VBDS
+4	VPS	VBDS NPS
+1	VPS	VBDS NP
+1	VPS BE VBDS
+12	VPS	VPS PP
+1	VPS PTHVBS VBDS
+
+# PP expands
+66	PP	Prep NP
+5	PP	Prep NPS
+27	PP	TO PLACE
+
+80	PLACE	LOCATION
+1	PLACE	PRP$ OBJECT
+1	PLACE	PRP$ OBJECTS
+20	PLACE	Det OBJECT
+1	PLACE	DetS OBJECTS
+
+# Adjectives
+1 Adj CD
+100	Adj	JJ
+1 Adj JJR
+1 Adj JJS
+100	AdjS	CDS
+1 AdjS  JJ
+1 AdjS  JJR
+1 AdjS  JJS

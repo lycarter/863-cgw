@@ -15,13 +15,6 @@
 #      that symbol is a nonterminal and should be rewritten.
 #######################
 
-# Rules for creating full sentences.
-100	S1	ROOT
-62	ROOT	S .
-11	ROOT	SS .
-0.5	ROOT	S !
-18	ROOT	Q ?
-
 # The basic grammar rules.  Here's what the abbreviations stand for:
 #    S  = sentence
 #    NP = noun phrase
@@ -31,172 +24,230 @@
 #    Prep = preposition
 #    Adj = adjective
 
-# Base sentence expands
-73	S	NP VP
-3	S	DO NOT VP
-3	S	either NP VP or NP VP
-3	S	DC , S
-16	DC	WRB S
-16	DC	C S
-16	DC	WDT SS
-16	DC	WDT VP
-1	DC 	DC PP
-16	DC	C SS
-16	DC	WP VBZ NP
-1	S 	DCV S
-1	DCV	DCVB S
-15	S	S DC
+# Rules for creating full sentences.
+100	S1	ROOT
+82	ROOT	SorSS .
+0.01	ROOT	SorSS ...
+0.5	ROOT	SorSS !
+12	ROOT	Q ?
 
+# Base sentence expands
+80	S	NP VP
+0.01	S	S , CC S
+2	S	DO NOT VP
+2	S	either NPVerbs or DODOES
+
+100	NPVerbs	NP VerbIT
+1	NPVerbs	NP Verb[notLinking] NP
+1	NPVerbs	NP Verb[notLinking] NPS
+1	NPVerbs	NPS VerbITS
+1	NPVerbs	NPS Verb[notLinking]S NP
+1	NPVerbs	NPS Verb[notLinking]S NPS
+
+100	DODOES	NP DOES
+1	DODOES	NPS DO
+
+2	S	DC , S
+11	DC	WRB S
+33	DC	C S
+11	DC	WDT SS
+11	DC	WDT VP
+11	DC	DC PP
+11	DC	C SS
+11	DC	WP VBZ NP
+1	DC[hvb]	NP DOES
+1	DC[hvb]	NP DOES
+11	S	S DC
+
+72	SorSS	S
+27	SorSS	SS
+
+1	S 	SorSS SemiColonLike SorSS
+
+1	NotWhole S
+1	NotWhole SS
+50	NotWhole	NP
+1	NotWhole VP
+50	NotWhole	NPS
+1	NotWhole VPS
+
+1	S 	S ColonLike NotWhole
+
+# Plural sentence
+82	SS	NPS VPS
+17	SS	SS DC
 
 # question expands
 20	Q	DO SS
 1	Q 	DOES S
 40	Q	WP Q[nobj]
 20	Q	WRB Q[nobj]
-1	Q 	HVB NP VP
-20	Q	HVBS NPS VPS
-
-# Plural sentence
-87	SS	NPS VPS
-12	SS	SS DC
+1	Q 	HVB NP VP[afterHelping]
+20	Q	HVBS NPS VPS[afterHelping]
 
 # Sentences where the object exists elsewhere
 1	S[nobj]	NP VP[nobj]
-1	Q[nobj]	DOES NP VP[pres][nobj]
+1	Q[nobj]	DOES NP VPS
+1	Q[nobj]	DO NPS VPS
 
 
 # NP expands
-56	NP	Noun
-28	NP	Det Noun
-2	NP	NP PP
+2	NP	Noun
+25	NP	Det Noun
+49	NP	Proper
+1	NP 	DetProp Proper
+1	NP	NP PP
 0.1	NP	NP Conj NP
 0.1	NP	Sel S
 0.1	NP	PRP$ NP
-2	NP	neither NP nor NP
+1	NP	neither NP nor NP
 1	NP	VBG	PP
+1	NP	NP 's NP
+4	NP	NNP
 
-# Noun with adjective phrase in middle of sentence
-1	NP	Noun PAUSE Det Noun PAUSE
-1	NP	Noun PAUSE Det NPS PAUSE
-1	NP	Noun PAUSE Noun PAUSE
-2	NP	Noun PAUSE NPS PAUSE
+0.01	NP	NP , NotWhole ,
+0.01	NP	NP -- NotWhole --
 
-# Noun with adjective phrase at end of sentence
-2	NP	Noun PAUSE Det Noun
-1	NP	Noun PAUSE Det NPS
-1	NP	Noun PAUSE Noun
-1	NP	Noun PAUSE NPS
+0.01	NP	NP , NotWhole
+0.01	NP	NP -- NotWhole
 
-6	Noun	Adj Noun
-8	Noun	PRP
-50	Noun	Proper
-4	Noun	NNP
+0.01	NPS	NPS , NotWhole ,
+0.01	NPS	NPS -- NotWhole --
 
-1	NOUNS NNS
-100	NOUNS	NNP
-1	NOUNS NNPS
-2	NP	NNP
+0.01	NPS	NPS , NotWhole
+0.01	NPS	NPS -- NotWhole
+
+20	Noun	Adj Noun
+7	NP	PRP
+12	Noun	NNP
+
+#Proper Nouns
+85	Proper	Name
+11	Proper	Title Name
+2	Proper	Name LastName
+1	Proper	Title Name LastName
 
 # NPS
-10	NPS	NNS
-30	NPS	AdjS NNS
-50	NPS	PRPS
-10	NPS	NP CC NP
+8	NPS	Det NPS
+17	NPS	NNS
+8	NPS	NNPS
+17	NPS	AdjS NNS
+4	NPS	AdjS NNPS
+30	NPS	PRPS
+4	NPS	NP CC NP
+1 NPS NPS CC NPS
+1 NPS NPS CC NP
+4	NPS	NP CC NPS
 
 # objects
-50	DirectObject	VB PP
-50	DirectObject	SS
-1	DirectObject	S
+1	DirectObject[part]	VB PP
+1	DirectObject[part]	SS
+1	DirectObject[part]	S
+1	DirectObject[nopart]	NP
+#			1	DirectObject[nopart]	SS
+#			1	DirectObject[nopart]	S
 100	IndirectObject	NP
 
 # VP expands
 16	VP	VerbT NP
-3	VP	VerbT JJ
-1	VP VBP NP
-3	VP	VB
-6	VP	VerbIT
-6	VP	VBZ
-3	VP	DOES
-6	VP	MD have been VB[part]
+2	VP	VerbT JJ
+9	VP	VB
+16	VP	VerbIT
+1	VP VBZ
+4	VP	MD have been VB[part]
 1	VP MD have been VB[part][t] NP
-3	VP	MD have VBN
+2	VP	MD have VBN
 1	VP MD have VBN[t] NP
-3	VP	MD VB
-3	VP	MD BE VBG
+
+2	VP	has been VB[part]
+1	VP has been VB[part][t] NP
+1	VP has VBN
+1	VP has VBN[t] NP
+
+2	VP	MD VB
+2	VP	MD BE VBG
 1	VP MD BE VBN
 0.1 VP  VP CC VP
 1	VP	VBG	PP
-1	VP	HVB VP
-3	VP	BE VBD
-3	VP	VBD
-3	VP	VBD NP
+#1	VP	HVB VP
+1	VP 	HVB VBG
+2	VP	BE VBD
+2	VP	VBD
+2	VP	VBD NP
 1	VP	VBD NPS
-1	VP	VBG IndirectObject DirectObject
-1	VP	VBP DirectObject
-1	VP	VBG	S
+1	VP	HVB VP[afterHelping]
+
+1	VP[afterHelping] VBG IndirectObject DirectObject[nopart]
+1	VP[afterHelping] VBG DirectObject[nopart]
+1	VP[afterHelping] VBG[knowledge] DirectObject[part]
+
+1	VP 	VBP[knowledge] DirectObject[part]
+1	VP 	VBP[knowledge] IndirectObject DirectObject[part]
+
+1	VP VerbT DirectObject[part]
+16	VP	VerbIT
+
 1	VP	VBD	PP
 1	VP	VP	RB
+1	VP	RBly VP
 1	VP	VP	PP
-3	VP	PTHVB VBD
+2	VP	PTHVB VBD
 
 # VPS
-12	VPS	VBP
-12	VPS	VBP PP
-12	VPS	MD VBP
-25	VPS	VB RB
-12	VPS	HVBS VBG PP
-12	VPS	VBP DirectObject
-12	VPS	VBG IndirectObject DirectObject
+4	VPS	VBP
+4	VPS	MD VBP
+16	VPS	VPS RB
+4	VPS	RBly VPS
+4	VPS	HVBS VBG
+1	VPS MD have been VB[part]
+1	VPS MD have been VB[part][t] NP
+1	VPS MD have VBN
+1	VPS MD have VBN[t] NP
+
+1	VPS have been VB[part]
+1	VPS have been VB[part][t] NP
+1	VPS have VBN
+1	VPS have VBN[t] NP
+
+8	VPS	VBP[knowledge] DirectObject[part]
+1	VPS VBP[knowledge] IndirectObject DirectObject[part]
+4	VPS	HVBS VPS[afterHelping]
+
+1	VPS[afterHelping] VBG IndirectObject DirectObject[part]
+1	VPS[afterHelping] VBG DirectObject[nopart]
+1	VPS[afterHelping] VBG[knowledge] DirectObject[part]
+
+4	VPS	VBP[t] DirectObject[nopart]
+24	VPS	VBP[it]
+
 1	VPS	HVBS VPS
-1	VPS VBDS
-1	VPS	VBDS NPS
+12	VPS	VBDS
+4	VPS	VBDS NPS
 1	VPS	VBDS NP
 1	VPS BE VBDS
-1	VPS	VBDS	PP
+12	VPS	VPS PP
 1	VPS PTHVBS VBDS
 
-# no object variants (for phrases containing question-objects)
-1	VP[pres][nobj]	VBP
-1	VP[pres][nobj]	VB NP
-1	VP[pres][nobj]	VBP NP VBP
-
-
 # PP expands
-61	PP	Prep NP
-23	PP	TO NOUNS
-7	PP	TO NP
-7	PP	Prep NPS
+66	PP	Prep NP
+5	PP	Prep NPS
+27	PP	TO PLACE
 
-
-
-
-# present tense variants
-1	S[pres]	NP	VP[pres]
-1	VP[pres]	V[pres] NP
-0.1	VP[pres]	VP[pres] PP
-1	VP[pres]	V'[pres]
-0.1	VP[pres]	VP[pres] Conj VP[pres]
-1	V[pres]		V[pres] Conj V[pres]
-
-# no object variants (for phrases containing question-objects)
-1	VP[pres][nobj]	V[pres]
-1	VP[pres][nobj]	VP[pres] PP[nobj]
-1	VP[pres][nobj]	V[pres] NP[nobj]
-0.1	VP[pres][nobj]	VP[pres][nobj] PP
-0.1	VP[pres][nobj]	VP[pres][nobj] Conj VP[pres][nobj]
-1	PP[nobj]	Prep
-1	PP[nobj]	Prep PP
-1	NP[nobj]	Sel S[nobj]
-1	S[nobj]		NP VP[nobj]
-1	VP[nobj]	Verb
-0.1	VP[nobj]	VP[nobj] PP
-0.1	VP[nobj]	VP[nobj] Conj VP[nobj]
+80	PLACE	LOCATION
+1	PLACE	PRP$ OBJECT
+1	PLACE	PRP$ OBJECTS
+20	PLACE	Det OBJECT
+1	PLACE	DetS OBJECTS
 
 # Adjectives
 1 Adj CD
 100	Adj	JJ
+1 Adj JJR
+1 Adj JJS
 100	AdjS	CDS
 1 AdjS  JJ
+1 AdjS  JJR
+1 AdjS  JJS
 # This is a hand-generated set of preterminal rules.
 # It specifies a simple tag set which will be handled by the S2
 # grammar and which can (though doesn't necessarily need to be)
@@ -211,83 +262,121 @@
 
 # Singular and mass nouns.  Notice that only the
 # ones that start with consonants get our Noun tag.
-6	Noun	castle
-10	Noun	king
+8	Noun	castle
+28	Noun	king
 1	Noun	defeater
 1	Noun	sovereign
-2	Noun	servant
+4	Noun	servant
 1	Noun	corner
 1	Noun	land
 1	Noun	quest
-2	Noun	chalice
+4	Noun	chalice
 1	Noun	master
-2	Noun	horse
-2	Noun	fruit
-2	Noun	swallow
-1	Noun	sun
+4	Noun	horse
+4	Noun	fruit
+4	Noun	swallow
+4	Noun	sun
 1	Noun	winter
 1	Noun	coconut
 1	Noun	pound
 1	Noun	husk
-2	Noun	home
+4	Noun	home
 1	Noun	weight
-2	Noun	story
+4	Noun	story
 
 # Determiners.
-26	Det	a
+23	Det	a
 1	Det	another
 1	Det	any
 1	Det	each
 1	Det	every
 1	Det	no
-6	Det	that
-66	Det	the
+4	Det	that
+71	Det	the
 1	Det	this
+
+1	DetProp another
+1	DetProp any
+1	DetProp each
+1	DetProp every
+1	DetProp no
+1	DetProp that
+1	DetProp this
+
+1	DetS	any
+1	DetS	no
+1	DetS	the
 
 # Prepositions.
 1	Prep	above
 1	Prep	across
-11	Prep	at
-1	Prep	below
-22	Prep	by
-11	Prep	for
-11	Prep	from
+7	Prep	at
+7	Prep	below
+15	Prep	by
+7	Prep	for
+7	Prep	from
 1	Prep	into
-11	Prep	near
-11	Prep	of
+7	Prep	near
+7	Prep	of
 1	Prep	on
 1	Prep	over
-1	Prep	through
-22	Prep	with
+7	Prep	through
+30	Prep	with
 
 # Proper nouns.  Note that our Proper tag is just for people.
-50	Proper	Arthur
-16	Proper	Guinevere
-8	Proper	Sir Lancelot
-1	Proper	Sir Bedevere
-8	Proper	Zoot
-1	Proper	Dingo
-16	Proper	Patsy
-1	Proper	Uther Pendragon
+48	Name	Arthur
+11	Name	Guinevere
+11	Name	Lancelot
+1	Name	Bedevere
+5	Name	Zoot
+5	Name	Dingo
+14	Name	Patsy
+2	Name	Uther
+
+100	LastName	Pendragon
+
+100	Title	Sir
 
 # Verbs (third person singular present).
 # Note that only transitive verbs get our VerbT tag,
 # and some of those could also function as intransitives!
 1	VerbT	has
 1	VerbT	covers
-66	VerbT	is
+62	VerbT	is
 1	VerbT	drinks
 1	VerbT	carries
-16	VerbT	rides
+12	VerbT	rides
 1	VerbT	speaks
 1	VerbT	grows
 1	VerbT	goes
 1	VerbT	migrates
 1	VerbT	suggests
-16	VerbT	knows
+25	VerbT	knows
 
 # Intransitive verb
-100	VerbIT	drinks
+1	VerbIT	covers
+50	VerbIT	drinks
+1	VerbIT	carries
+12	VerbIT	rides
+1	VerbIT	speaks
+12	VerbIT	grows
+1	VerbIT	goes
+1	VerbIT	migrates
+1	VerbIT	suggests
+25	VerbIT	knows
+
+# Not Linking
+1	Verb[notLinking]	has
+1	Verb[notLinking]	covers
+1	Verb[notLinking]	drinks
+1	Verb[notLinking]	carries
+1	Verb[notLinking]	rides
+1	Verb[notLinking]	speaks
+1	Verb[notLinking]	grows
+1	Verb[notLinking]	goes
+1	Verb[notLinking]	migrates
+1	Verb[notLinking]	suggests
+1	Verb[notLinking]	knows
 
 # End-of-sentence.
 1	Misc	!
@@ -295,11 +384,19 @@
 1	Misc	?
 
 # Pauses.
-100	PAUSE	,
-1	PAUSE	...
-1	PAUSE	--
-1	PAUSE	;
-1	PAUSE	:
+#1	PAUSE	,
+#1	PAUSE	...
+#1	PAUSE	--
+#1	PAUSE	;
+#1	PAUSE	:
+
+1	SemiColonLike	;
+1	SemiColonLike	--
+1	SemiColonLike	:
+
+1	ColonLike	:
+1	ColonLike	--
+
 
 # Coordinating conjunctions.
 100	CC	and
@@ -320,20 +417,20 @@
 
 # Numbers - Adjective. (Kevin did this)
 1	CD	one
-33	CDS	eight
-33	CDS	five
+20	CDS	eight
+40	CDS	five
 1	CDS	5.5
-33	CDS	sixty
-1	CDS	5,000
+20	CDS	sixty
+20	CDS	5,000
 
 # Expletive.
 1	EX	there
 
 # Subordinating conjunctions.
-50	C	that
+75	C	that
 1	C	so
 1	C	while
-50	C	because
+25	C	because
 1	C	if
 
 # Modals.
@@ -353,21 +450,21 @@
 1	JJ	bloody
 1	JJ	weary
 1	JJ	unable
-25	JJ	trusty
+16	JJ	trusty
 1	JJ	further
 1	JJ	sacred
-1	JJ	tropical
+16	JJ	tropical
 1	JJ	indigenous
 1	JJ	temperate
 1	JJ	hot
 1	JJ	lucky
 1	JJ	simple
-25	JJ	tiny
-25	JJ	hard
+33	JJ	tiny
+16	JJ	hard
 1	JJ	sensational
 1	JJ	comparable
 1	JJ	angolian
-25	JJ	yellow
+16	JJ	yellow
 1	JJ	plodding
 
 # Comparative adjectives.
@@ -394,30 +491,71 @@
 1	NNS	snows
 1	NNS	mountains
 1	NNS	areas
-25	NNS	strangers
-25	NNS	inches
-1	NNS	snakes
+37	NNS	strangers
+12	NNS	inches
+12	NNS	snakes
 1	NNS	ants
-25	NNS	nights
+12	NNS	nights
+
+# places
+1	LOCATION 	mountains
+1	LOCATION 	areas
+100	LOCATION	Camelot
+1	LOCATION 	England
+
+1	OBJECT	Round Table
+1	OBJECT	Holy Grail
+100	OBJECT	castle
+1	OBJECT	king
+1	OBJECT	defeater
+1	OBJECT	sovereign
+1	OBJECT	servant
+1	OBJECT	corner
+1	OBJECT	land
+1	OBJECT	quest
+1	OBJECT	chalice
+1	OBJECT	master
+1	OBJECT	horse
+1	OBJECT	fruit
+1	OBJECT	swallow
+1	OBJECT	sun
+1	OBJECT	winter
+1	OBJECT	coconut
+1	OBJECT	pound
+1	OBJECT	husk
+1	OBJECT	home
+1	OBJECT	weight
+1	OBJECT	story
+
+1	OBJECTS	Round Table
+1	OBJECTS	Holy Grail
+1	OBJECTS	coconuts
+1	OBJECTS	halves
+1	OBJECTS	mountains
+1	OBJECTS	areas
+1	OBJECTS	strangers
+1	OBJECTS	snakes
+1	OBJECTS	ants
+
 
 # More proper nouns, not people.
 
-50	NNP	Camelot
-16	NNP	England
-16	NNP	Holy Grail
+16	NNP	Camelot
+33	NNP	England
+33	NNP	Holy Grail
 16	NNP	Round Table
 
 # Plural proper nouns.
-1	NNPS	Britons
-1	NNPS	Saxons
+33	NNPS	Britons
+66	NNPS	Saxons
 
 # Personal pronouns.
-25	PRP	he
+40	PRP	he
 1	PRP	her
 1	PRP	him
-50	PRP	it
+40	PRP	it
 1	PRP	one
-25	PRP	she
+20	PRP	she
 1	PRP	them
 
 # plural pronouns
@@ -431,14 +569,21 @@
 1	PRP$	their
 
 # Adverbs.
-1	RB	again
+16	RB	again
 1	RB	already
 1	RB	currently
 50	RB	frequently
-50	RB	precisely
-1	RB	south
+16	RB	precisely
+16	RB	south
 1	RB	successfully
 1	RB	unfortunately
+
+100	RBly	already
+1	RBly	currently
+1	RBly	frequently
+1	RBly	precisely
+1	RBly	successfully
+1	RBly	unfortunately
 
 # 'do'/'does'
 100	DO	do
@@ -451,16 +596,39 @@
 100	NOT	not
 
 # Verbs (base form).
-16	VB	have
-33	VB	speak
+1	VB	have
+57	VB	speak
 1	VB	cover
-16	VB	ride
+28	VB	ride
 1	VB	drink
 1	VB	grow
-1	VB	carry
+14	VB	carry
 1	VB	suggest
-33	VB	migrate
+1	VB	migrate
 1	VB	know
+
+# Plural intransitive verbs
+1	VerbITS	speak
+1	VerbITS	cover
+1	VerbITS	ride
+1	VerbITS	drink
+1	VerbITS	grow
+1	VerbITS	carry
+1	VerbITS	suggest
+1	VerbITS	migrate
+1	VerbITS	know
+
+# plural not linking verbs
+1	Verb[notLinking]S	have
+1	Verb[notLinking]S	speak
+1	Verb[notLinking]S	cover
+1	Verb[notLinking]S	ride
+1	Verb[notLinking]S	drink
+1	Verb[notLinking]S	grow
+1	Verb[notLinking]S	carry
+1	Verb[notLinking]S	suggest
+1	Verb[notLinking]S	migrate
+1	Verb[notLinking]S	know
 
 # BE is special
 100	BE	be
@@ -468,6 +636,7 @@
 # Verbs (past tense, singular)
 1	VBD	had
 1	VBD	spoke
+1	VBD	ate
 14	VBD	covered
 14	VBD	was
 14	VBD	rode
@@ -481,14 +650,15 @@
 # Verbs (past tense, plural)
 1	VBDS	were
 1	VBDS	had
+25	VBDS	ate
 1	VBDS	spoke
 1	VBDS	covered
 1	VBDS	rode
 1	VBDS	drank
 1	VBDS	grew
 1	VBDS	carried
-1	VBDS	suggested
-1	VBDS	migrated
+50	VBDS	suggested
+25	VBDS	migrated
 1	VBDS	knew
 
 # too many verbs
@@ -498,15 +668,18 @@
 # Verbs (present participles).
 1	VBG	having
 1	VBG	speaking
-25	VBG	covering
+20	VBG	covering
 1	VBG	being
-50	VBG	riding
+40	VBG	riding
 1	VBG	drinking
 1	VBG	growing
 1	VBG	carrying
-25	VBG	suggesting
+40	VBG	suggesting
 1	VBG	migrating
 1	VBG	knowing
+
+1	VBG[knowledge] suggesting
+1	VBG[knowledge] knowing
 
 # Verbs (past participle).
 1	VBN	had
@@ -553,12 +726,6 @@
 1	VB[part][t]	carrying
 1	VB[part][t]	suggesting
 
-
-
-# VBN but can take a VBG afterwards (transitive?)
-1	VBN[v]	been
-1	VBN[v]	suggested
-
 # More third person singular verbs.
 1	VBZ	speaks
 1	VBZ	grows
@@ -569,16 +736,52 @@
 
 # Verbs (present, plural, third person).
 1	VBP	have
-14	VBP	speak
+1	VBP	speak
 1	VBP	cover
-14	VBP	are
-14	VBP	ride
+50	VBP	are
+1	VBP	ride
 1	VBP	drink
-14	VBP	grow
-14	VBP	carry
-14	VBP	suggest
+50	VBP	grow
+1	VBP	carry
+1	VBP	suggest
 1	VBP	migrate
-14	VBP	know
+1	VBP	know
+
+# doesn't have "are"
+1	VBP[notLinking]	have
+1	VBP[notLinking]	speak
+1	VBP[notLinking]	cover
+1	VBP[notLinking]	ride
+1	VBP[notLinking]	drink
+1	VBP[notLinking]	grow
+1	VBP[notLinking]	carry
+1	VBP[notLinking]	suggest
+1	VBP[notLinking]	migrate
+1	VBP[notLinking]	know
+
+1	VBP[knowledge]	suggest
+1	VBP[knowledge]	know
+
+# transitive
+1	VBP[t]	have
+1	VBP[t]	cover
+1	VBP[t]	ride
+1	VBP[t]	drink
+1	VBP[t]	grow
+1	VBP[t]	carry
+1	VBP[t]	suggest
+1	VBP[t]	know
+
+# intransitive
+1	VBP[it]	speak
+1	VBP[it]	cover
+1	VBP[it]	ride
+1	VBP[it]	drink
+1	VBP[it]	grow
+1	VBP[it]	carry
+1	VBP[it]	suggest
+1	VBP[it]	migrate
+1	VBP[it]	know
 
 # helping verb
 100	HVBS	are

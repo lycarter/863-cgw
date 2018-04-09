@@ -110,8 +110,8 @@ def replace_weights(regexp_hash, weights, input_file, output_file, normalize=Fal
         else:
             replaced = False
             for regexp, production in regexp_hash.items():
-                print regexp
-                print line
+                # print regexp
+                # print line
                 if re.match(regexp, line):
                     rhs_symbols = [str(nt) for nt in production.rhs()]
                     replacement = "%d\t%s\t%s" % (weights[production], production.lhs(), ' '.join(rhs_symbols))

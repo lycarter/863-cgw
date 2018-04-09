@@ -45,6 +45,14 @@
 1	Det	the
 1	Det	this
 
+1	DetProp another
+1	DetProp any
+1	DetProp each
+1	DetProp every
+1	DetProp no
+1	DetProp that
+1	DetProp this
+
 1	DetS	any
 1	DetS	no
 1	DetS	the
@@ -78,8 +86,6 @@
 1	LastName	Pendragon
 
 1	Title	Sir
-
-
 
 # Verbs (third person singular present).
 # Note that only transitive verbs get our VerbT tag,
@@ -322,6 +328,13 @@
 1	RB	successfully
 1	RB	unfortunately
 
+1	RBly	already
+1	RBly	currently
+1	RBly	frequently
+1	RBly	precisely
+1	RBly	successfully
+1	RBly	unfortunately
+
 # 'do'/'does'
 1	DO	do
 1	DOES	does
@@ -415,6 +428,9 @@
 1	VBG	migrating
 1	VBG	knowing
 
+1	VBG[knowledge] suggesting
+1	VBG[knowledge] knowing
+
 # Verbs (past participle).
 1	VBN	had
 1	VBN	spoken
@@ -480,6 +496,42 @@
 1	VBP	suggest
 1	VBP	migrate
 1	VBP	know
+
+# doesn't have "are"
+1	VBP[notLinking]	have
+1	VBP[notLinking]	speak
+1	VBP[notLinking]	cover
+1	VBP[notLinking]	ride
+1	VBP[notLinking]	drink
+1	VBP[notLinking]	grow
+1	VBP[notLinking]	carry
+1	VBP[notLinking]	suggest
+1	VBP[notLinking]	migrate
+1	VBP[notLinking]	know
+
+1	VBP[knowledge]	suggest
+1	VBP[knowledge]	know
+
+# transitive
+1	VBP[t]	have
+1	VBP[t]	cover
+1	VBP[t]	ride
+1	VBP[t]	drink
+1	VBP[t]	grow
+1	VBP[t]	carry
+1	VBP[t]	suggest
+1	VBP[t]	know
+
+# intransitive
+1	VBP[it]	speak
+1	VBP[it]	cover
+1	VBP[it]	ride
+1	VBP[it]	drink
+1	VBP[it]	grow
+1	VBP[it]	carry
+1	VBP[it]	suggest
+1	VBP[it]	migrate
+1	VBP[it]	know
 
 # helping verb
 1	HVBS	are

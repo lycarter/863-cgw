@@ -33,6 +33,7 @@
 
 # Base sentence expands
 1	S	NP VP
+0.01	S	S , CC S
 1	S 	DO NOT VP
 1	S 	either NPVerbs or DODOES
 
@@ -56,8 +57,6 @@
 1	DC 	WP VBZ NP
 1	DC[hvb]	NP DOES
 1	DC[hvb]	NP DOES
-1	S 	DCV S
-1	DCV	DCVB S
 1	S 	S DC
 
 1	SorSS	S
@@ -83,8 +82,8 @@
 1	Q 	DOES S
 1	Q 	WP Q[nobj]
 1	Q 	WRB Q[nobj]
-1	Q 	HVB NP VP
-1	Q 	HVBS NPS VPS
+1	Q 	HVB NP VP[afterHelping]
+1	Q 	HVBS NPS VPS[afterHelping]
 
 # Sentences where the object exists elsewhere
 1	S[nobj]	NP VP[nobj]
@@ -95,6 +94,8 @@
 # NP expands
 1	NP	Noun
 3	NP	Det Noun
+1	NP 	Proper
+1	NP 	DetProp Proper
 1	NP	NP PP
 0.1	NP	NP Conj NP
 0.1	NP	Sel S
@@ -117,13 +118,13 @@
 0.01	NPS	NPS -- NotWhole
 
 3 Noun  Adj Noun
-1	Noun 	PRP
-1	Noun 	Proper
+1	NP 	PRP
 1 Noun  NNP
 
 #Proper Nouns
 1	Proper	Name
 1	Proper	Title Name
+1	Proper	Name LastName
 1	Proper	Title Name LastName
 
 # NPS
@@ -134,14 +135,17 @@
 1 NPS AdjS NNPS
 1 NPS PRPS
 1 NPS NP CC NP
+1 NPS NPS CC NPS
+1 NPS NPS CC NP
+1 NPS NP CC NPS
 
 # objects
 1	DirectObject[part]	VB PP
 1	DirectObject[part]	SS
 1	DirectObject[part]	S
 1	DirectObject[nopart]	NP
-1	DirectObject[nopart]	SS
-1	DirectObject[nopart]	S
+#			1	DirectObject[nopart]	SS
+#			1	DirectObject[nopart]	S
 1	IndirectObject	NP
 
 # VP expands
@@ -154,30 +158,68 @@
 1	VP MD have been VB[part][t] NP
 1	VP MD have VBN
 1	VP MD have VBN[t] NP
+
+1	VP has been VB[part]
+1	VP has been VB[part][t] NP
+1	VP has VBN
+1	VP has VBN[t] NP
+
 1	VP MD VB
 1	VP MD BE VBG
 1	VP MD BE VBN
 0.1 VP  VP CC VP
 1	VP	VBG	PP
-1	VP	HVB VP
+#1	VP	HVB VP
+1	VP 	HVB VBG
 1	VP	BE VBD
 1	VP	VBD
 1	VP	VBD NP
 1	VP	VBD NPS
-1	VP	VBG IndirectObject DirectObject[part]
-1	VP	VBG	S
+1	VP	HVB VP[afterHelping]
+
+1	VP[afterHelping] VBG IndirectObject DirectObject[nopart]
+1	VP[afterHelping] VBG DirectObject[nopart]
+1	VP[afterHelping] VBG[knowledge] DirectObject[part]
+
+1	VP 	VBP[knowledge] DirectObject[part]
+1	VP 	VBP[knowledge] IndirectObject DirectObject[part]
+
+1	VP VerbT DirectObject[part]
+1	VP VerbIT
+
 1	VP	VBD	PP
 1	VP	VP	RB
+1	VP	RBly VP
 1	VP	VP	PP
 1	VP	PTHVB VBD
 
 # VPS
 1	VPS VBP
 1	VPS MD VBP
-1	VPS VB RB
+1	VPS VPS RB
+1	VPS RBly VPS
 1	VPS HVBS VBG
-1	VPS VBP DirectObject[nopart]
-1	VPS	VBG IndirectObject DirectObject[part]
+1	VPS MD have been VB[part]
+1	VPS MD have been VB[part][t] NP
+1	VPS MD have VBN
+1	VPS MD have VBN[t] NP
+
+1	VPS have been VB[part]
+1	VPS have been VB[part][t] NP
+1	VPS have VBN
+1	VPS have VBN[t] NP
+
+1	VPS VBP[knowledge] DirectObject[part]
+1	VPS VBP[knowledge] IndirectObject DirectObject[part]
+1	VPS HVBS VPS[afterHelping]
+
+1	VPS[afterHelping] VBG IndirectObject DirectObject[part]
+1	VPS[afterHelping] VBG DirectObject[nopart]
+1	VPS[afterHelping] VBG[knowledge] DirectObject[part]
+
+1	VPS VBP[t] DirectObject[nopart]
+1	VPS VBP[it]
+
 1	VPS	HVBS VPS
 1	VPS VBDS
 1	VPS	VBDS NPS
